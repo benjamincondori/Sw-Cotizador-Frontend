@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    // BoxiconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

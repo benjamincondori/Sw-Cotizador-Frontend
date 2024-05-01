@@ -25,6 +25,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
+              "node_modules/boxicons/css/boxicons.min.css",
               "src/styles.css"
             ],
             "scripts": []

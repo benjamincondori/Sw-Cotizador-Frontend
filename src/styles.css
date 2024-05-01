@@ -17,9 +17,106 @@ button {
 :root {
   --primary-color: #343EC1;
   --secondary-color: #1A3A78;
+  --tertiary-color: #5A67BA;
   --background-color: #F5F2F2;
   --text-color-1: #1B1B1B;
   --text-color-2: #747474;
+  --text-color-3: #575F6E;
+  --text-color-4: #E2E4E5;
+  --text-color-5: #AFAFAF;
+  --text-color-6: #D0D0D0;
+  --text-color-7: #B6B6B7;
+  --text-color-8: #170F49;
+  --text-label: #242426;
+  --text-title: #242731;
+  --text-input: #575F6E;
 }
+
+/* FORM */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-label);
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--text-color-6);
+  color: var(--text-input);
+  border-radius: 5px;
+  background: none;
+  outline: none;
+}
+.input-group input::placeholder {
+  color: var(--text-color-5);
+}
+.input-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(52, 61, 193, 0.1);
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:disabled {
+  opacity: 0.5;
+}
+.btn-primary {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+.btn-primary:hover {
+  box-shadow: 0 0 15px rgba(52, 61, 193, 0.3);
+}
+
+
+
+/* MARGIN AND PADDING */
+.mb10 {
+  margin-bottom: 10px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-60 {
+  margin-bottom: 60px;
+}
+.mt-60 {
+  margin-top: 60px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.py-100 {
+  padding: 100px 0;
+}
+.px-60 {
+  padding: 0 60px;
+}
+.p-50 {
+  padding: 50px;
+}
+
 
 
