@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { FormsModule } from '@angular/forms';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     NavbarComponent,
     ChatComponent,
+    ImageViewerComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     NavbarComponent,
     ChatComponent,
+    ImageViewerComponent,
   ]
 })
 export class SharedModule { }

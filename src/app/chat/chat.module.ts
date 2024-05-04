@@ -7,6 +7,8 @@ import { InitPageComponent } from './pages/init-page/init-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { SidebarChatComponent } from './components/sidebar-chat/sidebar-chat.component';
+import { ChatIaComponent } from './components/chat-ia/chat-ia.component';
+import { IntroductionComponent } from './components/introduction/introduction.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { SidebarChatComponent } from './components/sidebar-chat/sidebar-chat.com
     ChatLayoutComponent,
     InitPageComponent,
     ChatPageComponent,
-    SidebarChatComponent
+    SidebarChatComponent,
+    ChatIaComponent,
+    IntroductionComponent
   ],
   imports: [
     CommonModule,

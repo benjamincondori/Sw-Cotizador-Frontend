@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="chat-messages">
+    <div #chatMessages class="chat-messages">
       <div class="message-container left">
         <img
           src="./assets/avatars/300-1.jpg"
@@ -55,39 +55,66 @@
         }"
       >
         <div class="message-content">
-          <div class="message-bubble">
+          <div *ngIf="message.type === 'text'" class="message-bubble">
             <p class="message-text">{{ message.text }}</p>
           </div>
-          <p class="message-info">{{ message.timestamp | date:'HH:mm a' }}</p>
+          <div *ngIf="message.type === 'image'" class="message-image">
+            <img
+              [src]="sanitizeImageUrl(message.image)"
+              alt="Imagen enviada"
+              class="message-image"
+              (click)="openImageModal(sanitizeImageUrl(message.image))"
+            />
+          </div>
+          <p class="message-info">{{ message.timestamp | date : "HH:mm a" }}</p>
         </div>
         <img
-          src="./assets/avatars/300-2.jpg"
+          src="./assets/avatars/300-7.jpg"
           alt="User Avatar"
           class="user-avatar"
         />
       </div>
     </div>
 
+    <div class="image-preview" *ngIf="selectedImage">
+      <img [src]="sanitizeImageUrl(selectedImage)" alt="Imagen seleccionada" />
+    </div>
+
     <div class="chat-input">
-      <!-- <input
-        [(ngModel)]="newMessage"
-        type="text"
-        placeholder="Escribe tu mensaje..."
-        class="message-input"
-      /> -->
+      <button (click)="openImagePicker()" class="clip-btn">
+        <i class="bx bx-paperclip bx-rotate-270"></i>
+      </button>
+      <button (click)="sendImageMessage()" class="clip-btn">
+        <i class="bx bx-check"></i>
+      </button>
+
       <textarea
-        #textareaRef
+        #textarea
         [(ngModel)]="newMessage"
         type="text"
         placeholder="Escribe tu mensaje..."
         class="message-input"
-        [rows]="rows"
-        (input)="limitLines()"
+        rows="1"
+        (input)="autoResize()"
       >
       </textarea>
-      <button (click)="sendMessage()" class="send-btn">
+      <input
+        #imageInput
+        type="file"
+        class="image-input"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        hidden
+      />
+      <button (click)="sendTextMessage()" class="send-btn">
         <i class="bx bxs-send"></i>
       </button>
     </div>
   </div>
+
+  <app-image-viewer
+    *ngIf="imageUrl"
+    [imageUrl]="imageUrl"
+    (closeModal)="closeImageModal()"
+  ></app-image-viewer>
 </aside>

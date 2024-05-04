@@ -71,6 +71,7 @@
   flex: 1;
   overflow-y: auto;
   border-radius: 12px;
+  margin-bottom: 20px;
 }
 .chat-messages::-webkit-scrollbar {
   display: none;
@@ -98,6 +99,12 @@
   border-radius: 12px;
   background-color: var(--text-color-4);
   word-wrap: break-word;
+}
+.message-image {
+  max-height: 120px;
+  max-width: 220px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .message-container.right .message-bubble {
@@ -134,6 +141,19 @@
   margin-left: 8px;
 }
 
+.image-preview {
+  max-height: 60px;
+  max-width: 370px;
+  border: 1px dashed var(--text-color-4);
+  border-radius: 6px;
+  padding: 5px;
+  margin-bottom: 8px;
+}
+.image-preview img {
+  height: 100%;
+  border-radius: 5px;
+}
+
 
 /* Estilos de la barra de envío */
 .chat-input {
@@ -142,7 +162,7 @@
   padding: 8px 10px;
   border: 1px solid var(--text-color-4);
   border-radius: 15px;
-  margin-top: 20px;
+  background-color: #fff;
 }
 
 .message-input {
@@ -152,12 +172,12 @@
   padding: 5px 10px;
   font-size: 1rem;
   color: var(--text-input);
-  background-color: #fff;
-  height: auto;
+  background-color: transparent;
   overflow-y: none; /* Scroll vertical cuando se supera la altura máxima */
   resize: none; /* Desactivar el redimensionamiento manual */
   word-wrap: break-word; /* Salto de línea automático */
   line-height: 1.3;
+  max-height: 70px;
 }
 .message-input::placeholder {
   color: var(--text-color-5);
@@ -165,12 +185,22 @@
 
 .send-btn {
   background-color: var(--tertiary-color);
-  border: none;
   color: #fff;
-  font-size: 1.5rem;
   padding: 6px;
+  margin-left: 5px;
+}
+.clip-btn {
+  background-color: transparent;
+  color: var(--tertiary-color);
+  padding-left: 4px;
+}
+.clip-btn i:hover {
+  color: var(--primary-color);
+}
+.send-btn, .clip-btn {
+  border: none;
+  font-size: 1.5rem;
   border-radius: 10px;
-  margin-left: 10px;
   cursor: pointer;
   display: grid;
   place-items: center;

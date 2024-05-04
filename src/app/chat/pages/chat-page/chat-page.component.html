@@ -1,7 +1,35 @@
 <div class="container-chats">
   <app-chat></app-chat>
   <div class="chat-ia">
-    <p>chat-page works! {{ chatId }}</p>
+    <div class="chat-messages">
+      <div *ngIf="!data ; else chatIa">
+        <app-introduction></app-introduction>
+      </div>
+      
+      <ng-template #chatIa>
+        <app-chat-ia [data]="data"></app-chat-ia>
+        <!-- <p>chat-page works! {{ chatId }}</p> -->
+      </ng-template>
+    </div>
+    
+    <div class="chat-input">
+      <textarea
+        #textareaRef
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        class="message-input"
+        rows="1"
+        (input)="autoResize()"
+      ></textarea>
+      <button (click)="sendData()" class="send-btn">
+        <i class='bx bx-paper-plane'></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="container-tokens">
+    <p class="tokens-counter">Token's 1500/2000</p>
+    <p class="tokens-status">Disponible</p>
   </div>
 </div>
 
