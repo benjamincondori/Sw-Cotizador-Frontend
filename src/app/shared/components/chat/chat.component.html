@@ -1,0 +1,93 @@
+<aside class="chat-container">
+  <div class="chat">
+    <div class="chat-header">
+      <button routerLink="/dashboard/chats" class="back-btn">
+        <i class="bx bx-left-arrow-alt"></i>
+      </button>
+      <div class="user-info">
+        <img
+          src="./assets/avatars/300-1.jpg"
+          alt="User Avatar"
+          class="user-avatar"
+        />
+        <div class="user-details">
+          <h3 class="user-name">John Doe | Asesor</h3>
+          <p class="user-number">+1 (555) 123-4567</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-messages">
+      <div class="message-container left">
+        <img
+          src="./assets/avatars/300-1.jpg"
+          alt="User Avatar"
+          class="user-avatar"
+        />
+        <div class="message-content">
+          <div class="message-bubble">
+            <p class="message-text">¡Hola! ¿Cómo estás?</p>
+          </div>
+          <p class="message-info">10:30 AM</p>
+        </div>
+      </div>
+
+      <div class="message-container right">
+        <div class="message-content">
+          <div class="message-bubble">
+            <p class="message-text">¡Muy bien, gracias! ¿Y tú?</p>
+          </div>
+          <p class="message-info">10:31 AM</p>
+        </div>
+        <img
+          src="./assets/avatars/300-7.jpg"
+          alt="User Avatar"
+          class="user-avatar"
+        />
+      </div>
+
+      <div
+        class="message-container"
+        *ngFor="let message of messages"
+        [ngClass]="{
+          left: message.sender === 'bot',
+          right: message.sender === 'user'
+        }"
+      >
+        <div class="message-content">
+          <div class="message-bubble">
+            <p class="message-text">{{ message.text }}</p>
+          </div>
+          <p class="message-info">{{ message.timestamp | date:'HH:mm a' }}</p>
+        </div>
+        <img
+          src="./assets/avatars/300-2.jpg"
+          alt="User Avatar"
+          class="user-avatar"
+        />
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <!-- <input
+        [(ngModel)]="newMessage"
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        class="message-input"
+      /> -->
+      <textarea
+        #textareaRef
+        [(ngModel)]="newMessage"
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        class="message-input"
+        [rows]="rows"
+        (input)="limitLines()"
+      >
+      </textarea>
+      <button (click)="sendMessage()" class="send-btn">
+        <i class="bx bxs-send"></i>
+      </button>
+    </div>
+  </div>
+</aside>

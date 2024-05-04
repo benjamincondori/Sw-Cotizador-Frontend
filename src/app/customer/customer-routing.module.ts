@@ -10,14 +10,19 @@ const routes: Routes = [
     component: CustomerLayoutComponent,
     children: [
       { path: 'home', component: HomePageComponent },
-      { path: 'chats', component: ChatsPageComponent },
+      // { path: 'chats', component: ChatsPageComponent },
+      {
+        path: 'chats',
+        loadChildren: () =>
+          import('../chat/chat.module').then((m) => m.ChatModule),
+      },
       { path: '**', redirectTo: 'home' },
-    ]
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CustomerRoutingModule { }
+export class CustomerRoutingModule {}

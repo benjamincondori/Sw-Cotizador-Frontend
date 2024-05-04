@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 interface Chat {
   id: number;
@@ -8,11 +8,11 @@ interface Chat {
 }
 
 @Component({
-  selector: 'app-chats-page',
-  templateUrl: './chats-page.component.html',
-  styleUrls: ['./chats-page.component.css']
+  selector: 'app-sidebar-chat',
+  templateUrl: './sidebar-chat.component.html',
+  styleUrls: ['./sidebar-chat.component.css']
 })
-export class ChatsPageComponent {
+export class SidebarChatComponent {
   chats!: Chat[];
   
   constructor() {

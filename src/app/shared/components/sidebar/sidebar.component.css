@@ -11,6 +11,7 @@
 .sidebar-logo {
   color: var(--tertiary-color);
   font-weight: 700;
+  cursor: default;
 }
 .sidebar-logo span {
   width: 45px;

@@ -11,6 +11,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FooterComponent,
     SidebarComponent,
     NavbarComponent,
+    ChatComponent,
   ],
   imports: [
     CommonModule,
@@ -26,12 +29,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     VgOverlayPlayModule,
     VgBufferingModule,
     RouterModule,
+    FormsModule, //quitar
   ], 
   exports: [
     VideoPlayerComponent,
     FooterComponent,
     SidebarComponent,
     NavbarComponent,
+    ChatComponent,
   ]
 })
 export class SharedModule { }

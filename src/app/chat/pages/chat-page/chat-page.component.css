@@ -1,0 +1,7 @@
+.container-chats {
+  display: flex;
+}
+.chat-ia {
+  flex: 1;
+  margin: 0px 50px;
+}
