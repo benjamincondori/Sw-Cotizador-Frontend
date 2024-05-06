@@ -66,7 +66,7 @@ button {
   --text-input: #575F6E;
 }
 
-/* FORM */
+/* FORM LOGIN AND REGISTER */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -98,6 +98,22 @@ button {
   box-shadow: 0 0 10px rgba(52, 61, 193, 0.1);
 }
 
+.text-danger {
+  color: red; 
+  font-size: 0.85rem;
+  text-align: left;
+  margin-top: 5px;
+}
+.is-invalid {
+  border: 1px solid red !important;
+}
+.is-valid {
+  border: 1px solid green !important;
+} 
+
+
+/* CUSTOM BUTTON */
+
 .btn {
   width: 100%;
   padding: 10px;
@@ -106,6 +122,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .btn:disabled {
   opacity: 0.5;
@@ -117,14 +134,57 @@ button {
 .btn-primary:hover {
   box-shadow: 0 0 15px rgba(52, 61, 193, 0.3);
 }
+.btn-gray {
+  color: var(--text-color-3);
+  background-color: var(--text-color-4);
+}
+.btn-gray:hover {
+  background-color: var(--text-color-6);
+}
+.btn-success {
+  color: #fff;
+  background-color: #6ede8a;
+}
+.btn-success:hover {
+  background-color: #4ad66d;
+}
 
+/* FORM SETTIGNS */
+.form-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color-3);
+  min-width: 400px;
+  margin-bottom: 5px;
+}
+.form-group input {
+  flex: 1;
+  min-width: 300px;
+  border: none;
+  outline: none;
+  background-color: #F1F1F2;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-input);
+}
+.form-group input::placeholder {
+  color: var(--text-color-5);
+}
 
 
 /* MARGIN AND PADDING */
-.mb10 {
+.mb-10 {
   margin-bottom: 10px;
 }
-.mt10 {
+.mt-10 {
   margin-top: 10px;
 }
 .mb-20 {
@@ -153,6 +213,9 @@ button {
 }
 .p-50 {
   padding: 50px;
+}
+.pr-40 {
+  padding-right: 40px !important;
 }
 
 

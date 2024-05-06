@@ -14,8 +14,9 @@ export class CustomerLayoutComponent {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.menuItems = [
-      { icon: 'bx-home', name: 'Home', route: '/dashboard/home' },
-      { icon: 'bx-chat', name: 'Chats', route: '/dashboard/chats' },
+      { icon: 'bx-home', name: 'Inicio', route: '/dashboard/home' },
+      { icon: 'bx-chat', name: 'Mensajes', route: '/dashboard/chats' },
+      { icon: 'bx-cog', name: 'Configuración', route: '/dashboard/settings' },
     ];
 
     this.router.events.subscribe((event) => {

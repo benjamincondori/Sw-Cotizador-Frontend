@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
   padding: 35px 20px;
+  z-index: 9999;
 }
 .sidebar-logo {
   color: var(--tertiary-color);

@@ -70,6 +70,9 @@
   padding: 10px;
   margin: 15px 0px;
 }
+.chat::-webkit-scrollbar {
+  width: 4px;
+}
 .chat-header {
   padding: 10px 10px 0px 10px;
 }

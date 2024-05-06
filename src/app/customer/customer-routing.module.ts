@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
+import { SettingPageComponent } from './pages/setting-page/setting-page.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CustomerLayoutComponent,
     children: [
       { path: 'home', component: HomePageComponent },
-      // { path: 'chats', component: ChatsPageComponent },
+      { path: 'settings', component: SettingPageComponent },
       {
         path: 'chats',
         loadChildren: () =>

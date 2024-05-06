@@ -1,0 +1,88 @@
+<div class="container-settings">
+  <div class="settings-header">
+    <h2>Configuración</h2>
+    <p>Dashboard / Configuración de la cuenta</p>
+  </div>
+
+  <section class="settings-profile">
+    <div class="profile-details">
+      <div class="profile-header">
+        <h4>Detalles de Perfil</h4>
+      </div>
+      <form action="">
+        <div class="profile-content">
+          <div class="form-group">
+            <label for="photo">Avatar</label>
+            <div class="container-photo">
+            <div class="profile-photo">
+              <label for="photo">
+                <figure class="image-preview">
+                  <img id="image-preview" src="./assets/avatars/300-1.jpg" alt="Preview" />
+                </figure>
+              </label>
+              <div class="delete-icon">
+                <i class='bx bx-x'></i>
+              </div>
+              <div class="edit-icon">
+                <i class='bx bx-pencil'></i>
+              </div>
+            </div>
+            <p class="types-files">Tipos de archivos permitidos: png, jpg, jpeg.</p>
+            <input type="file" id="photo" name="photo" accept="image/*" hidden />
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" />
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div class="form-group">
+            <label for="gender">Genero:</label>
+            <div class="content-radio">
+              <label class="custom-radio"
+                >Femenino
+                <input
+                  value="Femenino"
+                  type="radio"
+                  name="gender"
+                />
+                <span class="checkmark"></span>
+              </label>
+
+              <label class="custom-radio"
+                >Masculino
+                <input
+                  value="Masculino"
+                  type="radio"
+                  name="gender"
+                />
+                <span class="checkmark"></span>
+              </label>
+
+              <label class="custom-radio"
+                >No especificado
+                <input
+                  value="No especificado"
+                  type="radio"
+                  name="gender"
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="profile-footer">
+          <button class="btn btn-gray">Cancelar</button>
+          <button class="btn btn-success">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

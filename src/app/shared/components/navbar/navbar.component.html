@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <div routerLink="/dashboard/home" class="navbar-logo">
+  <div [routerLink]="routeHome" class="navbar-logo">
     <!-- <img src="./assets/images/logo.png" alt="Logo"> -->
     <p><span>SW</span>Cotizador</p>
   </div>
@@ -7,7 +7,7 @@
     <li class="navbar-item">
       <img src="./assets/icons/ic-notifications.png" alt="Notificaciones"/>
     </li>
-    <li class="navbar-item">
+    <li [routerLink]="routeSetting" class="navbar-item">
       <img src="./assets/icons/ic-settings.png" alt="Configuraciones"/>
     </li>
     <li class="navbar-item">

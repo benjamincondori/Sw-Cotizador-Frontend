@@ -6,6 +6,7 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
 import { SharedModule } from '../shared/shared.module';
+import { SettingPageComponent } from './pages/setting-page/setting-page.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     CustomerLayoutComponent,
     HomePageComponent,
     ChatsPageComponent,
+    SettingPageComponent,
   ],
   imports: [
     CommonModule,
