@@ -3,6 +3,7 @@
     <!-- <img src="./assets/images/logo.png" alt="Logo"> -->
     <p><span>SW</span>Cotizador</p>
   </div>
+  {{ currentUser?.name ? currentUser?.name : 'admin'}}
   <ul class="navbar-items">
     <li class="navbar-item">
       <img src="./assets/icons/ic-notifications.png" alt="Notificaciones"/>
@@ -11,7 +12,7 @@
       <img src="./assets/icons/ic-settings.png" alt="Configuraciones"/>
     </li>
     <li class="navbar-item">
-      <button class="btn-logout">Cerrar Sesión</button>
+      <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
     </li>
   </ul>
 </nav>

@@ -6,6 +6,7 @@ import { CustomValidators } from 'src/app/shared/Validators/custom.validator';
 import { UserRegister } from '../../interfaces/user.interface';
 import { ValidatorsService } from '../../../shared/services/validators.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -15,6 +16,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 export class RegisterPageComponent implements OnInit {
   
   public registerForm!: FormGroup;
+  public loading: boolean = false;
   
   constructor(
     private authService: AuthService,
@@ -64,6 +66,8 @@ export class RegisterPageComponent implements OnInit {
       return;
     }
     
+    this.loading = true;
+    
     const formData = this.registerForm.value;
     const user: UserRegister = {
       name: formData.name,
@@ -73,6 +77,9 @@ export class RegisterPageComponent implements OnInit {
     }
     
     this.authService.register(user)
+      .pipe(
+        finalize(() => this.loading = false)
+      )
       .subscribe({
         next: () => {
           this.toastService.toast('Usuario registrado con éxito', 'success');
