@@ -41,6 +41,13 @@
 .navbar-item:last-child {
   margin-left: 35px;
 }
+.text-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color-1);
+  cursor: default;
+  margin-right: 15px;
+}
 
 .btn-logout {
   background: none;

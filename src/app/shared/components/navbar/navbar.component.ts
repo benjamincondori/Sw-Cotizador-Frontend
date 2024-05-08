@@ -28,8 +28,8 @@ export class NavbarComponent {
     this.router.navigate(['/auth/login']);
   }
   
-  get currentUser() {
-    return this.user;
-  }
+  // get currentUser(): UserCurrent | null {
+  //   return this.user;
+  // }
   
 }

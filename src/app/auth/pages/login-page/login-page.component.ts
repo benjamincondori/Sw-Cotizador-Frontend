@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ValidatorsService } from 'src/app/shared/services/validators.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { AlertsService } from 'src/app/shared/services/toast.service';
 import { CustomValidators } from 'src/app/shared/Validators/custom.validator';
 import { finalize } from 'rxjs';
 
@@ -15,13 +15,15 @@ import { finalize } from 'rxjs';
 export class LoginPageComponent {
   public loginForm!: FormGroup;
   public loading: boolean = false;
+  public returnUrl: string | null = null;
   
   constructor(
     private authService: AuthService,
     private validatorsService: ValidatorsService,
-    private toastService: ToastService,
+    private alertsService: AlertsService,
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
   
   ngOnInit(): void {
@@ -40,6 +42,8 @@ export class LoginPageComponent {
         ],
       ],
     });
+    
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
   
   login(): void {
@@ -60,15 +64,20 @@ export class LoginPageComponent {
       .subscribe({
         next: (user) => {
           this.authService.setCurrentUser(user);
-          if (user.roles.includes('user')) {
-            this.router.navigate(['/dashboard/home']);
-          } else if (user.roles.includes('admin')) {
-            // TODO: Redirigir a la página de administrador
+          if (this.returnUrl) {
+            this.router.navigate([this.returnUrl]);
+            return;
+          } else {
+            if (user.roles.includes('user')) {
+              this.router.navigate(['/dashboard/home']);
+            } else if (user.roles.includes('admin')) {
+              // TODO: Redirigir a la página de administrador
+            }
           }
-          this.toastService.toast('Usuario autenticado con éxito', 'success');
+          this.alertsService.toast('Usuario autenticado con éxito', 'success');
         },
         error: (errorMessage) => {
-          this.toastService.toast(errorMessage, 'error');
+          this.alertsService.toast(errorMessage, 'error');
         },
       });
   }

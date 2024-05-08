@@ -3,9 +3,13 @@
     <!-- <img src="./assets/images/logo.png" alt="Logo"> -->
     <p><span>SW</span>Cotizador</p>
   </div>
-  {{ currentUser?.name ? currentUser?.name : 'admin'}}
   <ul class="navbar-items">
     <li class="navbar-item">
+      <span class="text-name">
+        {{ user?.name }} {{ user?.lastName }}
+      </span>
+    </li>
+    <li routerLink="/" class="navbar-item">
       <img src="./assets/icons/ic-notifications.png" alt="Notificaciones"/>
     </li>
     <li [routerLink]="routeSetting" class="navbar-item">

@@ -7,7 +7,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { SettingPageComponent } from './pages/setting-page/setting-page.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { SettingPageComponent } from './pages/setting-page/setting-page.componen
     CommonModule,
     CustomerRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
   ]
 })
 export class CustomerModule { }

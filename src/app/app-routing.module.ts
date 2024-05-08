@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomePageComponent } from './auth/pages/welcome-page/welcome-page.component';
 import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 import { isNotAuthenticatedGuard } from './auth/guards/is-not-authenticated.guard';
+import { roleGuard } from './auth/guards/role.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: WelcomePageComponent,
     canActivate: [isNotAuthenticatedGuard],
+    // canActivate: [isAuthenticatedGuard, roleGuard],
+    // data: {
+    //   roles: ['admin'] 
+    // }
   },
   {
     path: 'auth',
@@ -18,7 +23,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule),
-    canActivate: [isAuthenticatedGuard],
+    canActivate: [isAuthenticatedGuard, roleGuard],
+    data: {
+      roles: ['user']
+    }
   },
   {
     path: '**',

@@ -1,7 +1,8 @@
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <!-- <img src="./assets/images/logo.png" alt="Logo"> -->
-    <p><span>SW</span>Logo</p>
+    <img [src]="photo" alt="Logo">
+    <p> {{ user?.name }} {{ user?.lastName }}</p>
+    <!-- <p><span>SW</span>Logo</p> -->
   </div>
   <div class="sidebar-menu">
     <p class="sidebar-menu-title">Menu</p>

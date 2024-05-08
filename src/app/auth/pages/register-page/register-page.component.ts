@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CustomValidators } from 'src/app/shared/Validators/custom.validator';
 import { UserRegister } from '../../interfaces/user.interface';
 import { ValidatorsService } from '../../../shared/services/validators.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { AlertsService } from 'src/app/shared/services/toast.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private validatorsService: ValidatorsService,
-    private toastService: ToastService,
+    private alertsService: AlertsService,
     private fb: FormBuilder,
     private router: Router,
   ) { }
@@ -82,11 +82,11 @@ export class RegisterPageComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          this.toastService.toast('Usuario registrado con éxito', 'success');
+          this.alertsService.toast('Usuario registrado con éxito', 'success');
           this.router.navigate(['/auth/login']);
         },
         error: (errorMessage) => {
-          this.toastService.toast(errorMessage, 'error');
+          this.alertsService.toast(errorMessage, 'error');
           console.error('Error en el registro:', errorMessage);
         },
       });
