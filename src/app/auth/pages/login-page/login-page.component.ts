@@ -66,7 +66,6 @@ export class LoginPageComponent {
           this.authService.setCurrentUser(user);
           if (this.returnUrl) {
             this.router.navigate([this.returnUrl]);
-            return;
           } else {
             if (user.roles.includes('user')) {
               this.router.navigate(['/dashboard/home']);

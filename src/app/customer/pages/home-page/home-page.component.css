@@ -152,6 +152,7 @@
   height: 26px;
 }
 
+
 @media (max-width: 950px) {
   .price-content {
     display: flex;

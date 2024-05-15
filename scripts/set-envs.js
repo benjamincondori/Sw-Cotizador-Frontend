@@ -6,6 +6,7 @@ const targetPath = './src/environments/environment.ts';
 const envConfigFile = `
   export const environment = {
     baseUrl: "${process.env.API_URL}",
+    clientId: "${process.env.CLIENT_ID}",
   }
 `;
 
