@@ -155,9 +155,13 @@ export class ModalPaypalComponent implements OnInit {
             //   });
 
             const response = await fetch(url, requestOptions);
+            console.log('response',response);
 
             const dataJson = await response.json();
+            console.log('dataJson', dataJson);
+            
             const orderData = dataJson.data;
+            console.log('orderData', orderData);
             // Three cases to handle:
             //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
             //   (2) Other non-recoverable errors -> Show a failure message
