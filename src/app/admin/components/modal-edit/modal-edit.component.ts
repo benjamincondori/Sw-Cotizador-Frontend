@@ -52,24 +52,6 @@ export class ModalEditComponent {
       lastname: this.advisor.lastname,
       email: this.advisor.email,
     }); 
-
-    // this.loading = true; // Establecer estado de carga al inicio
-    // this.subscription = this.modalService.$modal
-    //   .pipe(finalize(() => (this.loading = false))) // Restablecer estado de carga
-    //   .subscribe({
-    //     next: (value) => {
-    //       this.advisor = value;
-    //       this.advisorId = this.advisor.id;
-    //       this.formAdvisorEdit.patchValue({
-    //         name: this.advisor.name,
-    //         lastname: this.advisor.lastname,
-    //         email: this.advisor.email,
-    //       });
-    //     },
-    //     error: (err) => {
-    //       this.alertsService.toast('Error al cargar los datos del asesor', 'error');
-    //     }
-    //   });
   }
 
   formEdit(): boolean {
