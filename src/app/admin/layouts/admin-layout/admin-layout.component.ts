@@ -14,7 +14,7 @@ export class AdminLayoutComponent {
   
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.menuItems = [
-      { icon: 'bx-home', name: 'Home', route: '/dashboard/home' },
+      { icon: 'bx-home', name: 'Home', route: '/home' },
     ];
   }
 }
