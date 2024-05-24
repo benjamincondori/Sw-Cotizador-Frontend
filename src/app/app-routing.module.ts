@@ -29,6 +29,14 @@ const routes: Routes = [
     }
   },
   {
+    path:'',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [isAuthenticatedGuard, roleGuard],
+    data: {
+      roles: ['admin']
+    }
+  },
+  {
     path: '**',
     redirectTo: '/',
   }
