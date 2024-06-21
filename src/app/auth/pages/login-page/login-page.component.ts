@@ -46,7 +46,7 @@ export class LoginPageComponent {
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
   
-  login(): void {
+  login() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -62,16 +62,31 @@ export class LoginPageComponent {
         finalize(() => this.loading = false)
       )
       .subscribe({
-        next: (user) => {
+        next: async (user) => {
           this.authService.setCurrentUser(user);
+          const roles = user.roles;
+          let selectedRole: string = roles[0];
+          
+          if (roles.length > 1) {
+            selectedRole = await this.alertsService.showSelectRole(roles);
+          }
+          localStorage.setItem('role', selectedRole);
+          
+          this.authService.setCurrentRole(selectedRole);
+          
           if (this.returnUrl) {
             this.router.navigate([this.returnUrl]);
           } else {
-            if (user.roles.includes('user')) {
-              this.router.navigate(['/dashboard/home']);
-            } else if (user.roles.includes('admin')) {
-              this.router.navigate(['/home']);
-
+            switch(selectedRole) {
+              case 'user':
+                this.router.navigate(['/dashboard/home']);
+                break;
+              case 'admin':
+                this.router.navigate(['/home']);
+                break;
+              // case 'asesor':
+              //   this.router.navigate(['/asesor']);
+              //   break;
             }
           }
           this.alertsService.toast('Usuario autenticado con éxito', 'success');

@@ -10,10 +10,6 @@ const routes: Routes = [
     path: '',
     component: WelcomePageComponent,
     canActivate: [isNotAuthenticatedGuard],
-    // canActivate: [isAuthenticatedGuard, roleGuard],
-    // data: {
-    //   roles: ['admin'] 
-    // }
   },
   {
     path: 'auth',

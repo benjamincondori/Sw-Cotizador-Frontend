@@ -17,14 +17,20 @@ export class AuthService implements OnInit, OnDestroy {
   private _currentUser!: BehaviorSubject<UserCurrent | null>;
   public currentUser$!: Observable<UserCurrent | null>;
   
+  private _currentRole!: BehaviorSubject<string|null>;
+  public currentRole$!: Observable<string|null>;
+  
   private suscription: Subscription = EMPTY.subscribe();
   
   constructor(private http: HttpClient) {
     const user = localStorage.getItem('user');
-    if (user) {
+    const role = localStorage.getItem('role');
+    if (user && role) {
       this._currentUser = new BehaviorSubject<UserCurrent | null>(JSON.parse(user));
+      this._currentRole = new BehaviorSubject<string | null>(role);
     } else {
       this._currentUser = new BehaviorSubject<UserCurrent | null>(null);
+      this._currentRole = new BehaviorSubject<string | null>(null);
     }
     this.currentUser$ = this._currentUser.asObservable();
     this.suscription = this.checkAuthStatus().subscribe();
@@ -43,6 +49,14 @@ export class AuthService implements OnInit, OnDestroy {
   
   getCurrentUser() {
     return this._currentUser.value;
+  }
+  
+  setCurrentRole(role: string | null) {
+    this._currentRole.next(role);
+  }
+  
+  getCurrentRole() {
+    return this._currentRole.value;
   }
   
   // Inicio de sesión

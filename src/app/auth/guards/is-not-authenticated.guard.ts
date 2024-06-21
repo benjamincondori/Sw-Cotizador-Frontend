@@ -10,16 +10,26 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   
   
   if (authService.isAuthenticated()) {
-    const user = authService.getCurrentUser();
-    if (user?.roles.includes('user')) {
+    // const user = authService.getCurrentUser();
+    const role = authService.getCurrentRole();
+    
+    if (role === 'user') {
       router.navigate(['/dashboard/home']);
-    } else if (user?.roles.includes('admin')) {
-      // TODO: Redirect to admin dashboard
+    } else if (role === 'admin') {
+      router.navigate(['/home']);
+    } else if (role === 'asesor') {
+      // router.navigate(['/asesor/home']);
     }
-    console.log('Usuario autenticado')
+    
+    // if (user?.roles.includes('user')) {
+    //   router.navigate(['/dashboard/home']);
+    // } else if (user?.roles.includes('admin')) {
+    //   // TODO: Redirect to admin dashboard
+    // }
+    console.log('IsNotAuthenticated: Usuario autenticado')
     return false;
   } else {
-    console.log('Usuario no autenticado')
+    console.log('IsNotAuthenticated: Usuario no autenticado')
     return true;
   }
   

@@ -32,9 +32,45 @@ export class AlertsService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminarlo'
+      confirmButtonText: 'Sí, eliminarlo',
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       return result.isConfirmed;
+    });
+  }
+  
+  showSelectRole(roles: string[]): Promise<string> {
+    // Mapea los roles a nombres amigables
+    const roleNames: { [key: string]: string } = {
+      'user': 'Usuario',
+      'admin': 'Administrador',
+      'asesor': 'Asesor' // Ajusta según sea necesario
+    };
+
+    // Crea las opciones del input
+    const inputOptions = roles.reduce((options: any, role: string) => {
+      options[role] = roleNames[role] || role; // Usa el nombre amigable o el valor original si no hay mapeo
+      return options;
+    }, {});
+    
+    
+    return Swal.fire({
+      title: "Seleccione el rol con el que desea ingresar",
+      input: "select",
+      inputOptions: inputOptions,
+      inputPlaceholder: "Seleccione un rol",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value) {
+            resolve();
+          } else {
+            resolve("Necesita seleccionar un rol.");
+          }
+        });
+      }
+    }).then((result) => {
+      return result.value;
     });
   }
   

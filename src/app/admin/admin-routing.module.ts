@@ -7,7 +7,8 @@ const routes: Routes = [{
   path:'',
   component:AdminLayoutComponent,
   children:[
-    {path:'home', component:HomePageComponent}
+    { path: 'home', component: HomePageComponent },
+    { path: '**', redirectTo: 'home' },
   ]
 }];
 

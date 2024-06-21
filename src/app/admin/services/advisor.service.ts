@@ -60,7 +60,7 @@ export class AdvisorService {
     ); 
    }
 
-   create(userData: {name: string, lastName: string, userName:string, email:string, password: string}):Observable<{}>{
+   create(userData: {name: string, lastName: string, email:string, password: string}):Observable<{}>{
     return this.http.post(`${this.apiURL}/asesor/create`, userData)
     .pipe(
       tap(()=>{

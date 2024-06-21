@@ -66,7 +66,6 @@ export class ModalEditComponent {
     const AdviserData= {
       name:this.name.value,
       lastName: this.lastname.value,
-      userName: this.name.value,
       email: this.email.value
     }
     this.advisorService.updateAdvisor(this.advisorId, AdviserData)

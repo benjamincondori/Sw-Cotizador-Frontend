@@ -10,13 +10,13 @@
   flex-direction: column;
 }
 
-.title{
-  font-family:"Inter", sans-serif;
-  color: #181C32;
+.title {
+  font-family: "Inter", sans-serif;
+  color: #181c32;
 }
-.subtitle{
-  font-family:"Inter", sans-serif ;
-  color: #A1A5B7;
+.subtitle {
+  font-family: "Inter", sans-serif;
+  color: #a1a5b7;
 }
 
 .chart {
@@ -25,52 +25,72 @@
   background-color: #fff;
   border-radius: 10px;
   width: 100%;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .chart-content {
-  justify-content:center;  
+  justify-content: center;
 }
 
-.chart-header{
+.chart-header {
   display: flex;
   justify-content: space-between;
   padding: 20px;
 }
 
-.header-left{
+.header-left {
   flex-direction: column;
   align-items: start;
 }
 
-.header-right{
+.header-right {
   flex-direction: row;
   justify-content: end;
 }
 
-.title-chart{
-  color:#3F4254;
-  font-family:"Inter", sans-serif ;
+.title-chart {
+  color: #3f4254;
+  font-family: "Inter", sans-serif;
   margin-bottom: 10px;
 }
 
-.subtitle-chart{
-  color: #A1A5B7;
-  font-family:"Inter", sans-serif ;
+.subtitle-chart {
+  color: #a1a5b7;
+  font-family: "Inter", sans-serif;
   margin-bottom: 10px;
 }
 
-.create-btn{
-  background: #343EC1;
+.create-btn {
+  background: #343ec1;
   color: white;
-  font-family:"Inter", sans-serif ;
+  font-family: "Inter", sans-serif;
 }
 
 .search-container {
-  font-family:"Inter", sans-serif ;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f8f4f4;
+  color: #666;
+  height: 40px;
+  border: none;
+  border-radius: 7px;
+  width: 300px;
+  padding: 5px 10px;
 }
 
-.search-container input{
+.search-container input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  margin-left: 10px;
+  color: #666;
+  flex: 1;
+}
+
+/* .search-container input{
+  outline: none;
   background-color: #f8f4f4; 
   color: #666; 
   display: inline-block;
@@ -80,171 +100,170 @@
   width: 300px;
   padding-left: 40px;
 
-}
+} */
 
-.alert-danger{
-  color:red;
+.alert-danger {
+  color: red;
   font-size: small;
 }
 
 .search-container .search-icon {
-  position: absolute;
+  /* position: absolute;
   left: 10px; 
   top: 50%;
-  transform: translateY(-50%);
-  width: 20px; 
-  height: 20px; 
+  transform: translateY(-50%); */
+  width: 20px;
+  height: 20px;
   background-image: url("src/assets/icons/ic-search.png");
   background-size: cover;
 }
-.table-users{
+.table-users {
   display: flex;
   justify-content: center;
 }
 
-table{
+table {
   width: 90%;
   border-collapse: collapse;
-  margin: 20px;
+  /* margin: 20px; */
 }
 
-.title-table{
-  color: #A1A5B7;
-  font-family:"Inter", sans-serif ;
+.title-table {
+  color: #a1a5b7;
+  font-family: "Inter", sans-serif;
 }
 
-th{
+th {
   padding-bottom: 20px;
   border-bottom: 1px solid #e2e2e2;
 }
 
-td{
+td {
   padding-bottom: 10px;
   border-bottom: 1px solid #e2e2e2;
 }
 
-
-.col-user{
+.col-user {
   padding-top: 15px;
   display: flex;
   justify-content: flex-start;
 }
 
-.img-user{
+.img-user {
   height: 50px;
 }
 
-.col-user-name, .col-user-time {
+.col-user-name,
+.col-user-time {
   font-size: 15px;
   margin-top: 5px;
   padding-left: 10px;
-  font-family:"Inter", sans-serif;
-  color:#3F4254
+  font-family: "Inter", sans-serif;
+  color: #3f4254;
 }
 
-.col-user-email{
+.col-user-email {
   margin-top: 5px;
   font-size: 15px;
   padding-left: 10px;
-  font-family:"Inter", sans-serif;
-  color:#A1A5B7
+  font-family: "Inter", sans-serif;
+  color: #a1a5b7;
 }
 
-.col-user-type{
+.col-user-type {
   font-size: 10px;
-  background: #F8F5FF;
-  color: #7239EA;
-  font-family:"Inter", sans-serif;
-  display: inline-block; 
+  background: #f8f5ff;
+  color: #7239ea;
+  font-family: "Inter", sans-serif;
+  display: inline-block;
   padding: 5px;
   border-radius: 5px;
 }
 
-.text-center{
-text-align: center;
+.text-center {
+  text-align: center;
 }
 
-.button-acc{
+.button-acc {
   border: none;
   background: none;
   cursor: pointer;
   margin-left: 10px;
 }
 
-.pageNumber{
+.pageNumber {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
-  margin-right: 3em;
+  margin: 20px 3em;
 }
 
-
 .pageNumber button {
-  width: 40px; 
+  width: 40px;
   height: 40px;
   margin-left: 10px;
   border-radius: 5px;
   border: none;
-  background-color:transparent; 
+  background-color: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #343EC1;
+  color: #343ec1;
   font-weight: bold; /* Opcionalmente, también puedes usar 'bolder' */
-
 }
 
 .pageNumber button.active {
-  background-color: #343EC1;
-  color: white; 
+  background-color: #343ec1;
+  color: white;
 }
 
 .pageNumber button:hover {
-  background-color: #343EC1; 
-  color: white; 
+  background-color: #343ec1;
+  color: white;
 }
 
 @media (max-width: 950px) {
- 
-  .chart{
+  .chart {
     width: 100%;
     overflow: scroll;
   }
 
-  .chart-content{
+  .chart-content {
     display: flex;
   }
 
-  .chart-header{
+  .chart-header {
     justify-content: center;
     flex-direction: column;
   }
 
-  .search-container{
+  .search-container {
     margin-top: 10px;
   }
 
-  table, thead, tbody, th, td, tr {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
     display: block;
-}
+  }
 
-th, td {
-  width: 90%;
-  box-sizing: border-box;
-  text-align: center;
-  flex: 1;
+  th,
+  td {
+    width: 90%;
+    box-sizing: border-box;
+    text-align: center;
+    flex: 1;
+  }
+  tr {
+    margin-bottom: 15px;
+  }
 
-}
-tr {
-  margin-bottom: 15px;
-}
-
-.col-user{
-  padding-top: 10px;
-  padding-left: 30px;
-  justify-content: left;
-}
-
-
+  .col-user {
+    padding-top: 10px;
+    padding-left: 30px;
+    justify-content: left;
+  }
 }
