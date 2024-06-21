@@ -16,16 +16,18 @@ export class SidebarComponent {
   @Input() items: MenuItem[] = [];
   public user!: UserCurrent | null;
   public suscription: Subscription = new Subscription();
-  
+
+  photo: string = 'assets/avatars/user-profile-dark.png';
+
   constructor(private authService: AuthService) {
     this.suscription = this.authService.currentUser$.subscribe((user) => {
       this.user = user;
     });
   }
   
-  get photo(): string {
-    return this.user?.profile.photo || PHOTO;
-  }
+  // get photo(): string {
+  //   return this.user?.profile.photo || PHOTO;
+  // }
   
   OnDestroy(): void {
     this.suscription.unsubscribe();

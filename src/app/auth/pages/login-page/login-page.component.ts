@@ -70,7 +70,8 @@ export class LoginPageComponent {
             if (user.roles.includes('user')) {
               this.router.navigate(['/dashboard/home']);
             } else if (user.roles.includes('admin')) {
-              // TODO: Redirigir a la página de administrador
+              this.router.navigate(['/home']);
+
             }
           }
           this.alertsService.toast('Usuario autenticado con éxito', 'success');
