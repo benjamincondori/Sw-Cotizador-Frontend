@@ -2,17 +2,16 @@
   <app-chat></app-chat>
   <div class="chat-ia">
     <div class="chat-messages">
-      <div *ngIf="!data ; else chatIa">
+      <div *ngIf="!hasData(); else chatIa">
         <app-introduction></app-introduction>
       </div>
-      
+
       <ng-template #chatIa>
         <app-chat-ia [data]="data"></app-chat-ia>
-        <!-- <p>chat-page works! {{ chatId }}</p> -->
       </ng-template>
     </div>
-    
-    <div class="chat-input">
+
+    <div *ngIf="!hasData()" class="chat-input">
       <textarea
         #textareaRef
         type="text"
@@ -21,15 +20,31 @@
         rows="1"
         (input)="autoResize()"
       ></textarea>
-      <button (click)="sendData()" class="send-btn">
-        <i class='bx bx-paper-plane'></i>
+      <button (click)="openModal()" class="send-btn">
+        <i class="bx bx-paper-plane"></i>
       </button>
     </div>
   </div>
-  
-  <div class="container-tokens">
-    <p class="tokens-counter">Token's 1500/2000</p>
-    <p class="tokens-status">Disponible</p>
-  </div>
-</div>
 
+  <div *ngIf="historyChats && historyChats.length > 0" class="container-tokens">
+    <p class="tokens-counter">Historial de Chats</p>
+    <!-- <p class="tokens-status">Disponible</p> -->
+    <!-- <hr class="divider"> -->
+    <ul class="history-chats">
+      <li
+        *ngFor="let chat of historyChats"
+        (click)="showChat(chat)"
+        class="item-history"
+        [class.active]="chat.id === selectedChatId"
+      >
+        {{ chat.name }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal Prompt -->
+  <app-modal-prompt
+    [isOpen]="modalOpen"
+    (onClose)="closeModal()"
+  ></app-modal-prompt>
+</div>

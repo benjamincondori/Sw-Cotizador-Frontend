@@ -70,9 +70,35 @@
 }
 .tokens-counter {
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 .tokens-status {
   color: var(--text-color-2);
+}
+.divider {
+  margin-bottom: 10px;
+}
+
+.history-chats {
+  list-style: none;
+  
+}
+.history-chats .item-history {
+  border: 1px solid var(--text-color-4);
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  user-select: none;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+.history-chats .item-history:hover {
+  background-color: var(--text-color-4);
+  cursor: pointer;
+}
+
+.item-history.active {
+  background-color: var(--text-color-4); 
+  font-weight: 500; 
 }
 

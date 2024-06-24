@@ -1,58 +1,17 @@
 <div class="container-chat-ia">
   <div class="container-body">
     <div class="container-images">
-      <div class="images" *ngFor="let imagen of data.images">
+      <div class="images" *ngFor="let imagen of data?.images">
         <img (click)="openImageModal(imagen)" [src]="imagen" alt="imagen" />
       </div>
     </div>
     <p>
-      Chat id: {{ data.messages }} <br />
+      Chat id: {{ data?.id }} <br />
       Cotización de Construcción de Propiedades
-      <br /><br />
-      Fecha: [Fecha de la cotización]<br />
-      Cliente: [Nombre del Cliente]<br />
-      Proyecto: [Nombre del Proyecto]<br />
-      Ubicación: [Ubicación del Proyecto]
-      <br /><br />
-      Descripción del Proyecto:<br />
-      El proyecto consiste en la construcción de [Descripción breve de la
-      propiedad a construir, por ejemplo: una casa de dos pisos con cuatro
-      habitaciones, tres baños, etc.].
-      <br /><br />
-      Detalle de los Trabajos:
-      <br /><br />
-      Preparación del Terreno:<br />
-      - Excavación y nivelación del terreno.<br />
-      - Retiro de escombros y desechos.<br /><br />
-      Cimentación:<br />
-      - Construcción de cimientos según especificaciones del proyecto.<br /><br />
-      Estructura:<br />
-      - Construcción de estructura principal (muros, columnas, vigas, etc.).<br /><br />
-      Acabados Exteriores:<br />
-      - Instalación de revestimientos exteriores (pintura, piedra, etc.).<br /><br />
-      Acabados Interiores:<br />
-      - Instalación de pisos, cielos rasos, paredes internas, etc.<br /><br />
-      Instalaciones:<br />
-      - Instalación eléctrica, sanitaria, y de gas según normativas vigentes.<br /><br />
-      Carpintería:<br />
-      - Fabricación e instalación de puertas, ventanas, y muebles de madera
-      necesarios.<br /><br />
-      Otros:<br />
-      - Cualquier otro trabajo necesario para la completa finalización del
-      proyecto.<br /><br />
-      Costo Estimado:<br />
-      - El costo estimado para la construcción de la propiedad descrita es de
-      [Monto total estimado en moneda local].<br /><br />
-      Condiciones de Pago:<br />
-      - 30% al inicio de los trabajos.<br />
-      - 40% a la mitad de la construcción.<br />
-      - 30% a la finalización y entrega del proyecto.<br /><br />
-      Notas Adicionales:<br />
-      - Los precios están sujetos a cambios dependiendo de la disponibilidad de
-      materiales y condiciones del mercado.<br />
-      - La cotización tiene una validez de [Tiempo de validez de la cotización,
-      por ejemplo: 30 días].
+      
+      <!-- {{ data?.data }} -->
     </p>
+    <div [innerHTML]="data?.data"></div>
   </div>
 
   <app-image-viewer

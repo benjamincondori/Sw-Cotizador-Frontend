@@ -103,6 +103,7 @@ button {
   font-size: 0.85rem;
   text-align: left;
   margin-top: 5px;
+  line-height: 1.2;
 }
 .is-invalid {
   border: 1px solid red !important;
@@ -192,6 +193,9 @@ button {
 }
 .mt-20 {
   margin-top: 20px;
+}
+.mb-40 {
+  margin-bottom: 40px;
 }
 .mb-60 {
   margin-bottom: 60px;

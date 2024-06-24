@@ -11,7 +11,7 @@
         <div *ngIf="chats.length > 0">
           <div class="chats-number">
             <i class='bx bx-message-rounded-dots'></i>
-            Chats iniciados 2/3
+            Chats iniciados {{ membership?.chatStock?.occupied }}/{{ membership?.chatStock?.chatsNumber }}
           </div>
           <h4>Historial de chats</h4>
         </div>

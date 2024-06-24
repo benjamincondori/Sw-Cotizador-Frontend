@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 interface Chat {
   id: number;
@@ -12,12 +12,17 @@ interface Chat {
   templateUrl: './chats-page.component.html',
   styleUrls: ['./chats-page.component.css']
 })
-export class ChatsPageComponent {
+export class ChatsPageComponent implements OnInit {
   chats!: Chat[];
   
   constructor() {
     this.chats = [];
   }
+  
+  ngOnInit(): void {
+    
+  }
+
   
   newChat() {
     let id = 0;

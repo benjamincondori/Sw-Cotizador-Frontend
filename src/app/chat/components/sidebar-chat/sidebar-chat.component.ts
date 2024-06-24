@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Membership } from 'src/app/customer/interfaces/membership.interface';
+import { MembershipService } from 'src/app/customer/services/membership.service';
+import { AlertsService } from 'src/app/shared/services/toast.service';
+import { ChatService } from '../../services/chat.service';
 
 interface Chat {
   id: number;
@@ -10,19 +14,71 @@ interface Chat {
 @Component({
   selector: 'app-sidebar-chat',
   templateUrl: './sidebar-chat.component.html',
-  styleUrls: ['./sidebar-chat.component.css']
+  styleUrls: ['./sidebar-chat.component.css'],
 })
-export class SidebarChatComponent {
-  chats!: Chat[];
+export class SidebarChatComponent implements OnInit {
+  public membership: Membership | undefined;
+  public chats!: Chat[];
   
-  constructor() {
+  private adjectives: string[] = ['Asesoramiento', 'Consulta', 'Cotización', 'Evaluación', 'Revisión'];
+  private nouns: string[] = ['Casa', 'Habitación', 'Proyecto', 'Construcción', 'Diseño'];
+
+
+  constructor(
+    private membershipService: MembershipService,
+    private alertsService: AlertsService,
+    private chatService: ChatService,
+  ) {
     this.chats = [];
+    this.membershipService.currentMembership$.subscribe((membership) => {
+      this.membership = membership?.membership;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getInfoMembership();
+  }
+
+  getInfoMembership(): void {
+    this.membershipService.getInfoMembership().subscribe({
+      next: (memebership) => {
+        this.membershipService.setCurrentMembership(memebership);
+      },
+      error: (err) => {
+        console.error('SidebarChatComponent::Error Get Info Membership: ', err);
+      },
+    });
   }
   
+  createChat(): void {
+    let name = this.generateRandomName();
+    this.membershipService.createFullChat(name).subscribe({
+      next: (fullChat) => {
+        console.log('fullChat', fullChat); 
+        this.chatService.setCurrentIdChatAi(fullChat.chatAi.id);
+        this.getInfoMembership();
+      },
+      error: (err) => {
+        console.error('SidebarChatComponent::Error Create Chat: ', err);
+      }
+    });
+  }
+
   newChat() {
+    if (
+      this.membership &&
+      this.membership?.chatStock.occupied >=
+        this.membership?.chatStock.chatsNumber
+    ) {
+      this.alertsService.toast('No puedes crear más chats', 'info');
+      return;
+    }
+    
+    this.createChat();
+
     let id = 0;
     if (this.chats.length > 0) {
-      id = this.chats[this.chats.length - 1].id
+      id = this.chats[this.chats.length - 1].id;
     }
     this.chats.push({
       id: id + 1,
@@ -32,4 +88,10 @@ export class SidebarChatComponent {
     });
   }
   
+  generateRandomName(): string {
+    const adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)];
+    const noun = this.nouns[Math.floor(Math.random() * this.nouns.length)];
+    const randomNum = Math.floor(Math.random() * 1000); // Adding a random number for uniqueness
+    return `${adjective} de ${noun} ${randomNum}`;
+  }
 }

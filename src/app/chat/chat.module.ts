@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { SidebarChatComponent } from './components/sidebar-chat/sidebar-chat.component';
 import { ChatIaComponent } from './components/chat-ia/chat-ia.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
+import { ModalPromptComponent } from './components/modal-prompt/modal-prompt.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,12 +20,14 @@ import { IntroductionComponent } from './components/introduction/introduction.co
     ChatPageComponent,
     SidebarChatComponent,
     ChatIaComponent,
-    IntroductionComponent
+    IntroductionComponent,
+    ModalPromptComponent
   ],
   imports: [
     CommonModule,
     ChatRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
   ]
 })
 export class ChatModule { }
