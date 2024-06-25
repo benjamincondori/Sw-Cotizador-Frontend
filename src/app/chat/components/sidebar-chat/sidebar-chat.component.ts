@@ -19,15 +19,27 @@ interface Chat {
 export class SidebarChatComponent implements OnInit {
   public membership: Membership | undefined;
   public chats!: Chat[];
-  
-  private adjectives: string[] = ['Asesoramiento', 'Consulta', 'Cotización', 'Evaluación', 'Revisión'];
-  private nouns: string[] = ['Casa', 'Habitación', 'Proyecto', 'Construcción', 'Diseño'];
+  public modalOpen: boolean = false;
 
+  private adjectives: string[] = [
+    'Asesoramiento',
+    'Consulta',
+    'Cotización',
+    'Evaluación',
+    'Revisión',
+  ];
+  private nouns: string[] = [
+    'Casa',
+    'Habitación',
+    'Proyecto',
+    'Construcción',
+    'Diseño',
+  ];
 
   constructor(
     private membershipService: MembershipService,
     private alertsService: AlertsService,
-    private chatService: ChatService,
+    private chatService: ChatService
   ) {
     this.chats = [];
     this.membershipService.currentMembership$.subscribe((membership) => {
@@ -49,18 +61,18 @@ export class SidebarChatComponent implements OnInit {
       },
     });
   }
-  
+
   createChat(): void {
     let name = this.generateRandomName();
     this.membershipService.createFullChat(name).subscribe({
       next: (fullChat) => {
-        console.log('fullChat', fullChat); 
+        console.log('fullChat', fullChat);
         this.chatService.setCurrentIdChatAi(fullChat.chatAi.id);
         this.getInfoMembership();
       },
       error: (err) => {
         console.error('SidebarChatComponent::Error Create Chat: ', err);
-      }
+      },
     });
   }
 
@@ -70,10 +82,17 @@ export class SidebarChatComponent implements OnInit {
       this.membership?.chatStock.occupied >=
         this.membership?.chatStock.chatsNumber
     ) {
-      this.alertsService.toast('No puedes crear más chats', 'info');
+      this.alertsService.showAlert(
+        'Ooops!',
+        'info',
+        'Has alcanzado el límite de chats disponibles. Por favor, actualiza tu plan.',
+        () => {
+          this.openPayPalModal();
+        }
+      );
       return;
     }
-    
+
     this.createChat();
 
     let id = 0;
@@ -87,11 +106,20 @@ export class SidebarChatComponent implements OnInit {
       title: 'Cotización de construcción',
     });
   }
-  
+
   generateRandomName(): string {
-    const adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)];
+    const adjective =
+      this.adjectives[Math.floor(Math.random() * this.adjectives.length)];
     const noun = this.nouns[Math.floor(Math.random() * this.nouns.length)];
     const randomNum = Math.floor(Math.random() * 1000); // Adding a random number for uniqueness
     return `${adjective} de ${noun} ${randomNum}`;
+  }
+
+  openPayPalModal() {
+    this.modalOpen = true;
+  }
+
+  closePaypalModal() {
+    this.modalOpen = false;
   }
 }

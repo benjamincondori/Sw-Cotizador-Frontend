@@ -15,13 +15,20 @@
 .chat-input {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px;
   border-radius: 30px;
   margin-top: 20px;
   background-color: #fff;
   box-shadow: 0 3px 20px rgba(52, 61, 193, 0.2);
 }
-
+.chat-text {
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--text-input);
+  user-select: none;
+}
 .message-input {
   flex-grow: 1;
   border: none;

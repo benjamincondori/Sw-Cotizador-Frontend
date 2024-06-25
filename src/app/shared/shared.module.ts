@@ -14,6 +14,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { LazyImageComponent } from './components/lazy-image/lazy-image.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     NavbarComponent,
     ChatComponent,
     ImageViewerComponent,
+    LazyImageComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     NavbarComponent,
     ChatComponent,
     ImageViewerComponent,
+    LazyImageComponent,
   ]
 })
 export class SharedModule { }

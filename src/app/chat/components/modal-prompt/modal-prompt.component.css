@@ -75,23 +75,22 @@
   font-size: 1rem;
   width: 100%;
 }
-.row {
-  display: flex;
-  flex-direction: row;
-  /* align-items: center; */
-  justify-content: space-between;
-  gap: 10px;
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px; /* Ajusta el espacio entre los elementos si es necesario */
 }
-.row.align-end {
-  justify-content: right;
+.grid-container-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; 
 }
-.col-4 {
-  max-width: 165px;
+.grid-container .col, .grid-container-3 .col {
+  width: 100%;
 }
-.col label, .col-4 label {
+.col label {
   font-weight: 500;
 }
-
 
 /* CUSTOM RADIO BUTTON */
 .content-radio {
@@ -182,21 +181,59 @@
   z-index: 9999;
 }
 .loader-text {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-top: 10px;
+  text-align: center;
+  margin-top: 5px;
 }
 .loader--text {
   position: relative;
   margin-top: 15px;
 }
-.loader--text:after {
+.loader--text.presupuesto:after {
   content: "Generando Presupuesto";
   font-weight: bold;
   font-size: 1.3rem;
-  animation-name: loading-text;
+  animation-name: loading-text-presupuesto;
   animation-duration: 3s;
   animation-iteration-count: infinite;
+}
+@keyframes loading-text-presupuesto {
+  0% {
+      content: "Generando Presupuesto";
+  }
+  25% {
+      content: "Generando Presupuesto.";
+  }
+  50% {
+      content: "Generando Presupuesto..";
+  }
+  75% {
+      content: "Generando Presupuesto...";
+  }
+}
+
+.loader--text.images:after {
+  content: "Generando Imagenes";
+  font-weight: bold;
+  font-size: 1.3rem;
+  animation-name: loading-text-images;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+@keyframes loading-text-images {
+  0% {
+      content: "Generando Imagenes";
+  }
+  25% {
+      content: "Generando Imagenes.";
+  }
+  50% {
+      content: "Generando Imagenes..";
+  }
+  75% {
+      content: "Generando Imagenes...";
+  }
 }
 
 @keyframes loader {
@@ -213,20 +250,7 @@
       transform: translateX(0);
   }
 }
-@keyframes loading-text {
-  0% {
-      content: "Generando Presupuesto";
-  }
-  25% {
-      content: "Generando Presupuesto.";
-  }
-  50% {
-      content: "Generando Presupuesto..";
-  }
-  75% {
-      content: "Generando Presupuesto...";
-  }
-}
+
 
 
 @keyframes square-animation {

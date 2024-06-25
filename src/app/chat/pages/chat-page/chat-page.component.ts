@@ -18,15 +18,17 @@ export class ChatPageComponent implements OnInit {
   
   public historyChats: FullChat[] | undefined;
   public modalOpen: boolean = false;
-  selectedChatId: number | null = null; // Variable para almacenar el ID del chat seleccionado
+  public selectedChatId: number | null = null; // Variable para almacenar el ID del chat seleccionado
 
   constructor(
     private route: ActivatedRoute,
     private membershipService: MembershipService,
     private chatService: ChatService,
   ) {
+    this.getInfoMembership();
     this.membershipService.currentMembership$.subscribe((membership) => {
       this.historyChats = membership?.fullChats;
+      this.selectedChatId = this.getFullChatIdByChatAiId();
     });
     this.chatService.currentIdChatAi$.subscribe((idChatAi) => {
       this.idChatAi = idChatAi;
@@ -34,12 +36,10 @@ export class ChatPageComponent implements OnInit {
       if (this.idChatAi) {
         this.getCurrentChatAi(this.idChatAi);
       }
-      console.log('hasData: ', this.hasData());
     });
   }
 
   ngOnInit(): void {
-    this.getInfoMembership();
     this.route.paramMap.subscribe((params) => {
       this.chatId = params.get('id');
     });
@@ -56,10 +56,6 @@ export class ChatPageComponent implements OnInit {
     });
   }
 
-  sendData(): void {
-    
-  }
-  
   showChat(data: FullChat): void {
     this.selectedChatId = data.id;
     this.chatService.setCurrentIdChatAi(data.chatAi.id);
@@ -68,6 +64,7 @@ export class ChatPageComponent implements OnInit {
   getCurrentChatAi(idChatAi: number) {
     this.chatService.getChatAi(idChatAi).subscribe({
       next: (chatAi) => {
+                
         this.data = chatAi;
         console.log('ChatIaComponent::Chat Ai: ', this.data);
       },
@@ -80,6 +77,13 @@ export class ChatPageComponent implements OnInit {
   hasData(): boolean {
     if (!this.data) return false;
     return this.data?.data != null && this.data?.images.length > 0;
+  }
+  
+  getFullChatIdByChatAiId(): number | null {
+    const fullChat = this.historyChats?.find(chat => {
+      return chat.chatAi.id === this.idChatAi;
+    });
+    return fullChat ? fullChat.id : null;
   }
 
   autoResize() {

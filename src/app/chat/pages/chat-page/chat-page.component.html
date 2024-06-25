@@ -12,14 +12,15 @@
     </div>
 
     <div *ngIf="!hasData()" class="chat-input">
-      <textarea
+      <!-- <textarea
         #textareaRef
         type="text"
         placeholder="Escribe tu mensaje..."
         class="message-input"
         rows="1"
         (input)="autoResize()"
-      ></textarea>
+      ></textarea> -->
+      <div class="chat-text">Generar Presupuesto</div>
       <button (click)="openModal()" class="send-btn">
         <i class="bx bx-paper-plane"></i>
       </button>

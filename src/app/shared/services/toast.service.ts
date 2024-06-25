@@ -24,7 +24,21 @@ export class AlertsService {
     });
   }
   
-  showConfirmationDialog(): Promise<boolean> {
+  showAlert(title: string, icon: SweetAlertIcon, text?: string, callback?: () => void): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      timer: 3000,
+      confirmButtonText: 'OK',
+    }).then((result) => {
+      if (callback) {
+        callback();
+      }
+    });
+  }
+  
+  async showConfirmationDialog(): Promise<boolean> {
     return Swal.fire({
       title: '¿Estás seguro?',
       text: '¡No podrás revertir esto!',
@@ -39,7 +53,7 @@ export class AlertsService {
     });
   }
   
-  showSelectRole(roles: string[]): Promise<string> {
+  async showSelectRole(roles: string[]): Promise<string> {
     // Mapea los roles a nombres amigables
     const roleNames: { [key: string]: string } = {
       'user': 'Usuario',

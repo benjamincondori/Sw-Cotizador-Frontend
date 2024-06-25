@@ -27,6 +27,9 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ReactiveFormsModule,
     NgxPayPalModule,
   ],
+  exports: [
+    ModalPaypalComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CustomerModule { }

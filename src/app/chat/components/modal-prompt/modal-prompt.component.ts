@@ -4,6 +4,7 @@ import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { ChatService } from '../../services/chat.service';
 import { lastValueFrom } from 'rxjs';
 import { AlertsService } from 'src/app/shared/services/toast.service';
+import { FORMAT_JSON } from '../../interfaces/prompt.utils';
 
 @Component({
   selector: 'app-modal-prompt',
@@ -15,12 +16,15 @@ export class ModalPromptComponent implements OnInit {
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
   public loading: boolean = false;
+  public isReady: boolean = false;
+  public totalRequests: number = 0;
   public pendingRequests: number = 0;
   public limit: number = 10;
 
   public opcionesTipo: string[] = [];
   public tipoHabitaciones!: string[];
   public tipoCocinas!: string[];
+  public tipoBaños!: string[];
   public tipoLabel!: string;
 
   public myForm!: FormGroup;
@@ -48,18 +52,26 @@ export class ModalPromptComponent implements OnInit {
     });
 
     this.tipoHabitaciones = [
-      'Matrimonial',
-      'Infantil',
-      'Para huéspedes',
-      'Personal',
+      'Dormitorio matrimonial',
+      'Dormitorio infantil',
+      'Dormitorio para huéspedes',
+      'Dormitorio individual',
     ];
 
     this.tipoCocinas = [
       'Cocina en línea',
+      'Cocina en isla',
       'Cocina en paralelo o dos frentes',
-      'Cocina en L',
-      'Cocina en U',
+      'Cocina en forma de L',
+      'Cocina en forma de U',
     ];
+    
+    this.tipoBaños = [
+      'Baño completo',
+      'Baño de cortesía',
+      'Baño de servicio',
+      'Baño en suite',
+    ]
 
     this.onTipoSeleccionadoChange();
   }
@@ -72,6 +84,9 @@ export class ModalPromptComponent implements OnInit {
     } else if (tipoSeleccionado === 'Cocina') {
       this.opcionesTipo = this.tipoCocinas;
       this.tipoLabel = 'cocina';
+    } else if (tipoSeleccionado === 'Baño') {
+      this.opcionesTipo = this.tipoBaños;
+      this.tipoLabel = 'baño';
     } else {
       this.opcionesTipo = [];
     }
@@ -98,7 +113,7 @@ export class ModalPromptComponent implements OnInit {
 
   generarPromptImage(data: any) {
     const { estilo, tipoHabitacion } = data;
-    const promptImage = `Genera una imagen de un plano de planta en 3D con vista de frente de un ${tipoHabitacion} con un estilo ${estilo}.`;
+    const promptImage = `Genera una imagen de un plano de una sola planta en 3D con vista de frente de un ${tipoHabitacion} con un estilo ${estilo}.`;
     this.resultPromptsImages.push(promptImage);
 
     console.log('Results Images', this.resultPromptsImages);
@@ -108,13 +123,13 @@ export class ModalPromptComponent implements OnInit {
     const { tipo, estilo, tipoHabitacion, ancho, largo, alto, tipoObra } = data;
 
     if (tipo == 'Habitación') {
-      const habitacion = `una habitación ${tipoHabitacion} con un ancho de ${ancho} metros, un largo de ${largo} metros y un alto de ${alto} metros`;
+      const habitacion = `un ${tipoHabitacion} con un ancho de ${ancho} metros, un largo de ${largo} metros y un alto de ${alto} metros`;
       this.prompts.push(habitacion);
     } else if (tipo == 'Cocina') {
       const cocina = `una ${tipoHabitacion} con un ancho de ${ancho} metros, un largo de ${largo} metros y un alto de ${alto} metros`;
       this.prompts.push(cocina);
     } else if (tipo == 'Baño') {
-      const baño = `un baño con un ancho de ${ancho} metros, un largo de ${largo} metros y un alto de ${alto} metros`;
+      const baño = `un ${tipoHabitacion} con un ancho de ${ancho} metros, un largo de ${largo} metros y un alto de ${alto} metros`;
       this.prompts.push(baño);
     }
 
@@ -134,58 +149,38 @@ export class ModalPromptComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.pendingRequests = this.resultPromptsImages.length;
+    this.totalRequests = this.resultPromptsImages.length;
 
     await this.createImages(this.resultPromptsImages, idChatAi);
-    // this.createImageSequentially(this.resultPromptsImages, 0, idChatAi);
 
-    const promptPresupuesto = `${this.resultPromptPresupuesto}
-      Por favor, incluye los siguientes detalles en el presupuesto:
-      1. Materiales de construcción necesarios.
-      2. Mano de obra requerida.
-      3. Costos estimados para cada categoría.
-      4. Un total final del presupuesto.
+    const promptPresupuesto = `${this.resultPromptPresupuesto}`;
+      // Por favor, incluye los siguientes detalles en el presupuesto:
+      // 1. Materiales de construcción necesarios.
+      // 2. Mano de obra requerida.
+      // 3. Costos estimados para cada categoría.
+      // 4. Un total final del presupuesto.
 
-      Asegúrate de formatear el presupuesto de manera clara y legible, utilizando saltos de línea entre los diferentes elementos.`;
+      // Asegúrate de formatear el presupuesto de manera clara y legible.
+      
+      // ${FORMAT_JSON}`;
 
+    this.isReady = true;
     await this.createPresupuesto(promptPresupuesto, idChatAi);
     this.chatService.setCurrentIdChatAi(idChatAi);
-    this.loading = false;
 
     this.closeModal();
   }
 
-  // private createImageSequentially(promptImages: string[], index: number, idChatAi: number): void {
-  //   if (index >= promptImages.length) {
-  //     console.log('All images have been uploaded');
-  //     return;
-  //   }
-
-  //   const image = promptImages[index];
-  //   this.chatService.createImage(image, idChatAi).subscribe({
-  //     next: (resp) => {
-  //       console.log('Response: ', resp);
-  //       this.checkLoadingState();
-  //       this.createImageSequentially(promptImages, index + 1, idChatAi); // Llamada recursiva
-  //     },
-  //     error: (err) => {
-  //       console.error('ModalPromptComponent::Error Create Image: ', err);
-  //       this.checkLoadingState();
-  //     }
-  //   });
-  // }
-
   async createImages(promptImages: string[], idChatAi: number): Promise<void> {
     for (const image of promptImages) {
-      try {
-        const response = await lastValueFrom(
-          this.chatService.createImage(image, idChatAi)
-        );
-        console.log('Images create successfully:', response);
-      } catch (error) {
+      await lastValueFrom(
+        this.chatService.createImage(image, idChatAi)
+      ).then((resp) => {
+        this.pendingRequests++;
+        console.log('Images create successfully:', resp);
+      }).catch((error) => {
         console.error('ModalPromptComponent::Error Create Image: ', error);
-      }
-      // this.checkLoadingState();
+      });
     }
   }
 
@@ -207,12 +202,12 @@ export class ModalPromptComponent implements OnInit {
       });
   }
 
-  checkLoadingState() {
-    this.pendingRequests--;
-    if (this.pendingRequests === 0) {
-      this.loading = false;
-    }
-  }
+  // checkLoadingState() {
+  //   this.pendingRequests--;
+  //   if (this.pendingRequests === 0) {
+  //     this.loading = false;
+  //   }
+  // }
 
   resetAll() {
     this.myForm.reset({
@@ -228,6 +223,10 @@ export class ModalPromptComponent implements OnInit {
     this.resultPromptPresupuesto = '';
     this.resultPromptsImages = [];
     this.onTipoSeleccionadoChange();
+    this.loading = false;
+    this.isReady = false;
+    this.totalRequests = 0;
+    this.pendingRequests = 0;
   }
 
   closeModal() {

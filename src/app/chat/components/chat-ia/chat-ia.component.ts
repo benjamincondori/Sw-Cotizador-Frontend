@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChatAI } from 'src/app/customer/interfaces/fullchat.interface';
-import { ChatService } from '../../services/chat.service';
+import { PresupuestoData } from '../../interfaces/presupuesto-data';
 
 @Component({
   selector: 'app-chat-ia',
@@ -8,28 +8,41 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./chat-ia.component.css']
 })
 export class ChatIaComponent implements OnInit {
-  @Input() data?: ChatAI;
+  // @Input() data?: ChatAI;
+  // @Input() presupuesto?: any;
   
-  constructor(private chatService: ChatService) {}
+  private _data?: ChatAI;
+  public presupuesto: PresupuestoData | null = null;
+  
+  @Input()
+  set data(data: ChatAI | undefined) {
+    this._data = data;
+    this.parseData();
+  }
+  get data(): ChatAI {
+    return this._data!;
+  }
+  
+  parseData(): void {
+    if (this._data) {
+      try {
+        this.presupuesto = this._data.data ? JSON.parse(this._data.data) : null;
+      } catch (error) {
+        console.error('Error parsing JSON string:', error);
+      }
+    }
+  }
+  
+  constructor() {}
   
   ngOnInit(): void {
-    // const idChatAi = this.chatService.currentIdChatAi;
-    // if (idChatAi) {
-    //   this.getCurrentChatAi(idChatAi);
-    // }
+    console.log('data', this.data);
   }
   
   imageUrl: string | null = null; 
   
-  // getCurrentChatAi(idChatAi: number) {
-  //   this.chatService.getChatAi(idChatAi).subscribe({
-  //     next: (chatAi) => {
-  //       this.data = chatAi;
-  //     },
-  //     error: (err) => {
-  //       console.error('ChatIaComponent::Error Get Chat Ai: ', err);
-  //     },
-  //   });
+  // get presupuesto() {
+  //   return JSON.parse(this.data!.data!) || [];
   // }
   
   openImageModal(imageUrl: string) {

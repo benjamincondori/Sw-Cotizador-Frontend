@@ -11,6 +11,7 @@ import { ChatIaComponent } from './components/chat-ia/chat-ia.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { ModalPromptComponent } from './components/modal-prompt/modal-prompt.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomerModule } from '../customer/customer.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChatRoutingModule,
     SharedModule,
     ReactiveFormsModule,
+    CustomerModule,
   ]
 })
 export class ChatModule { }

@@ -2,7 +2,7 @@
   <div class="modal-content">
     <button class="btn close-button" (click)="closeModal()">&times;</button>
 
-    <h3 class="modal-title">Generar Prompt para la habitación</h3>
+    <h3 class="modal-title">Generar Prompt</h3>
 
     <div class="modal-body">
       <form [formGroup]="myForm" (submit)="addPrompt()">
@@ -47,16 +47,17 @@
           </span>
         </div>
 
-        <div class="row mb-20">
+        <div class="row grid-container mb-20">
           <div class="col">
             <label for="estilo">Tipo de estilo:</label>
             <select class="form-control" formControlName="estilo" id="estilo">
-              <option value="">Seleccione un estilo</option>
+              <option value="">Seleccione una opción</option>
               <option value="contemporáneo">Contemporáneo</option>
               <option value="moderno">Moderno</option>
               <option value="rústico">Rústico</option>
               <option value="mediterráneo">Mediterráneo</option>
               <option value="colonial">Colonial</option>
+              <option value="minimalista">Minimalista</option>
             </select>
             <span *ngIf="isInvalidField('estilo')" class="text-danger">
               * {{ getMessageError("estilo") }}
@@ -70,7 +71,7 @@
               formControlName="tipoHabitacion"
               id="categoria"
             >
-              <option value="">Seleccione un tipo de habitación</option>
+              <option value="">Seleccione una opción</option>
               <option [value]="tipo" *ngFor="let tipo of opcionesTipo">
                 {{ tipo }}
               </option>
@@ -81,8 +82,8 @@
           </div>
         </div>
 
-        <div class="row mb-20">
-          <div class="col-4">
+        <div class="grid-container-3 mb-20">
+          <div class="col">
             <label for="ancho">Ancho (m):</label>
             <input
               formControlName="ancho"
@@ -99,7 +100,7 @@
             </span>
           </div>
 
-          <div class="col-4">
+          <div class="col">
             <label for="largo">Largo (m):</label>
             <input
               formControlName="largo"
@@ -116,7 +117,7 @@
             </span>
           </div>
 
-          <div class="col-4">
+          <div class="col">
             <label for="alto">Alto (m):</label>
             <input
               formControlName="alto"
@@ -134,7 +135,7 @@
           </div>
         </div>
 
-        <div class="row mb-40">
+        <div class="grid-container mb-40">
           <div class="col">
             <label for="obra">Tipo de obra:</label>
             <select class="form-control" formControlName="tipoObra" id="obra">
@@ -148,10 +149,15 @@
           </div>
         </div>
 
-        <div class="row mb-20 align-end">
-          <button type="submit" class="btn btn-gray">Añadir Prompt</button>
-          <button type="button" [disabled]="resultPromptPresupuesto.length == 0" (click)="onSubmit()" class="btn btn-primary">
-            Realizar Petición
+        <div class="grid-container mb-20">
+          <button type="submit" class="btn btn-gray">Añadir al Prompt</button>
+          <button
+            type="button"
+            [disabled]="resultPromptPresupuesto.length == 0"
+            (click)="onSubmit()"
+            class="btn btn-primary"
+          >
+            Generar Presupuesto
           </button>
         </div>
       </form>
@@ -176,8 +182,20 @@
         <div class="loader-square"></div>
         <div class="loader-square"></div>
       </div>
-      <!-- <div class="loader-text">Espere un momento</div> -->
-      <div class="loader--text"></div>
+      <!-- <div class="loader--text"></div> -->
+      
+      <div *ngIf="!isReady">
+        <div class="loader--text images"></div>
+        <div class="loader-text">
+          Completado {{ pendingRequests }}/{{ totalRequests }}
+        </div>
+      </div>
+      <div *ngIf="isReady" class="loader-text">
+        <div class="loader--text presupuesto"></div>
+        <div class="loader-text">
+          Ya casi esta listo
+        </div>
+      </div>
     </div>
   </div>
 </div>

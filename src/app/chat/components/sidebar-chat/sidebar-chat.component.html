@@ -49,4 +49,10 @@
       </button>
     </div>
   </div>
+  
+  <!-- MODALS -->
+  <app-modal-paypal
+    [isOpen]="modalOpen"
+    (onClose)="closePaypalModal()"
+  ></app-modal-paypal>
 </aside>
