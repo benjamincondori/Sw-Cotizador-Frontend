@@ -41,6 +41,7 @@ export class SidebarChatComponent implements OnInit {
     private alertsService: AlertsService,
     private chatService: ChatService
   ) {
+    this.getInfoMembership();
     this.chats = [];
     this.membershipService.currentMembership$.subscribe((membership) => {
       this.membership = membership?.membership;
@@ -48,7 +49,7 @@ export class SidebarChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getInfoMembership();
+   
   }
 
   getInfoMembership(): void {
@@ -87,6 +88,7 @@ export class SidebarChatComponent implements OnInit {
         'info',
         'Has alcanzado el límite de chats disponibles. Por favor, actualiza tu plan.',
         () => {
+          this.getInfoMembership();
           this.openPayPalModal();
         }
       );
