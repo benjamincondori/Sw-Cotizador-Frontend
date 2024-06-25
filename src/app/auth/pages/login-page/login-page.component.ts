@@ -84,9 +84,9 @@ export class LoginPageComponent {
               case 'admin':
                 this.router.navigate(['/home']);
                 break;
-              // case 'asesor':
-              //   this.router.navigate(['/asesor']);
-              //   break;
+              case 'asesor':
+                this.router.navigate(['/asesor/home']);
+                break;
             }
           }
           this.alertsService.toast('Usuario autenticado con éxito', 'success');

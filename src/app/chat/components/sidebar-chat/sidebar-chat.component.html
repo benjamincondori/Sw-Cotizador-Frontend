@@ -31,9 +31,7 @@
                 </div>
                 <p>{{ chat.title }}</p>
               </div>
-              <!-- <div class="chat-date">
-                <p>{{ chat.date }}</p>
-              </div> -->
+ 
             </a>
           </li>
         </ul>
@@ -50,3 +48,9 @@
     </div>
   </div>
 </aside>
+
+<app-modal-selection-asesor
+[isOpen]="modalOpen"
+(onStartChat)="onChatSelected($event)"
+(onClose)="closeSelectionAsesorModal()">
+</app-modal-selection-asesor>

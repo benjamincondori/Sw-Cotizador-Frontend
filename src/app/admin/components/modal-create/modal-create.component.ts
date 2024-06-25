@@ -69,6 +69,7 @@ export class ModalCreateComponent {
       name: this.name.value,
       lastName: this.lastname.value,
       email: this.email.value,
+      userName: this.email.value,
       password: this.password.value,
     };
 

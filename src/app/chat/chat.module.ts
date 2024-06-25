@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SidebarChatComponent } from './components/sidebar-chat/sidebar-chat.component';
 import { ChatIaComponent } from './components/chat-ia/chat-ia.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
+import { ModalSelectionAsesorComponent } from '../customer/components/modal-selection-asesor/modal-selection-asesor.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { IntroductionComponent } from './components/introduction/introduction.co
     ChatPageComponent,
     SidebarChatComponent,
     ChatIaComponent,
-    IntroductionComponent
+    IntroductionComponent,
+    ModalSelectionAsesorComponent
   ],
   imports: [
     CommonModule,

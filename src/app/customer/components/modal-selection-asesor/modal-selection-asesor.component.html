@@ -1,0 +1,41 @@
+<div class="modal" [class.open]="isOpen">
+    <div class="modal-content">
+        <button class="btn close-button" (click)="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 >Seleccionar asesor</h2>
+                <p class="mt-10">Inicia un nuevo chat, para brindarte un asesoramiento con respecto a tu presupuesto</p>
+            </div>
+            <div class="modal-body mt-20">
+                <h3>Dimensión del terreno</h3>
+                <div class="list-asesores">
+                    <div class="list-asesores-content">
+                        <div *ngFor="let asesor of asesores; let i = index"
+                        [class.active]="selectedAsesorIndex === i"
+                        class="asesor-item"
+                        (click)="selectChat(i)">
+                            <div class="item-left">
+                                <div class="chat-image-wrapper">
+                                    <img [src]="asesor.image" alt="" class="chat-image">
+                                </div>
+                                <div class="chat-details">
+                                    <span class="chat-name">{{ asesor.name }} {{ asesor.lastName }}</span>
+                                    <span class="chat-email">{{ asesor.email }}</span>
+                                </div>
+                            </div>
+    
+                            <div class="item-right">
+                                <span class="status-available"  [class.online]="asesor.online" [class.offline]="!asesor.online"></span>
+                                <small class="text-status-connection">{{ asesor.online ? 'Disponible' : 'Ocuapado' }}</small>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="button-chat" (click)="startChat()">Iniciar Chat</button>
+            </div>
+    </div>
+  </div>
+  

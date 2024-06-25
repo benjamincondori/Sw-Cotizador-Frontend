@@ -14,7 +14,7 @@ interface Chat {
 })
 export class ChatsPageComponent {
   chats!: Chat[];
-  
+
   constructor() {
     this.chats = [];
   }
@@ -31,5 +31,4 @@ export class ChatsPageComponent {
       title: 'Cotización de construcción',
     });
   }
-  
 }

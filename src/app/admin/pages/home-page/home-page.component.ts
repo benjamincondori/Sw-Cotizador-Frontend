@@ -80,8 +80,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.advisorService.getAllAdvisors().subscribe(
       (res) => {
         this.allAdvisors = res;
-        console.log(res);
-
         this.filteredAdvisors = this.allAdvisors;
         this.totalPages = Math.floor(this.filteredAdvisors.length / this.rows);
       },

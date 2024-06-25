@@ -25,6 +25,14 @@ const routes: Routes = [
     }
   },
   {
+    path:'asesor',
+    loadChildren: () => import('./asesor/asesor.module').then(m => m.AsesorModule),
+    canActivate: [isAuthenticatedGuard, roleGuard],
+    data: {
+      roles: ['asesor']
+    }
+  },
+  {
     path:'',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate: [isAuthenticatedGuard, roleGuard],

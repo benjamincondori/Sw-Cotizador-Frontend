@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatLayoutComponent } from './layouts/chat-layout/chat-layout.component';
 import { InitPageComponent } from './pages/init-page/init-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
+import { ModalSelectionAsesorComponent } from '../customer/components/modal-selection-asesor/modal-selection-asesor.component';
 
 const routes: Routes = [
   {

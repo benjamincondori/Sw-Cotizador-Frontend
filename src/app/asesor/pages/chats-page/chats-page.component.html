@@ -1,0 +1,167 @@
+<div class="container">
+    <h3 class="title mt-20"><strong>Mensajes</strong></h3>
+    <h5 class="subtitle mt-10">Dashboard / Mensajes</h5>
+
+    <div class="chart mt-60">
+        <div class="chat-list">
+            <div class= "chat-list-header">
+                <h3 class="text-list-header">Mensajes</h3>
+                <div class="button-chat">
+                    <button class="button-add-client">
+                        <i class="bx bx-plus icon-chat"></i>
+                    </button> 
+                    <h4 class="title-chat">CHAT</h4>           
+                </div>
+            </div>
+<!-- Vista lista de chats -->
+            <div class="chat-list-clients">
+
+                <div *ngFor="let chat of chats; let i = index"
+                    [class.active]="selectedChatIndex === i"
+                    class="chat-item"
+                    (click)="selectChat(i)">
+
+                    <div class="chat-image-wrapper">
+                        <img [src]="chat.image" alt="Imagen de Usuario" class="chat-image">
+                        <span class="status-dot" [class.online]="chat.online" [class.offline]="!chat.online"></span>
+                    </div>
+
+                    <div class="chat-details">
+                        <span class="chat-name">{{ chat.name }}</span>
+                        <span class="chat-last-message">{{ chat.lastMessage }}</span>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+<!-- Vista de los mensajes -->
+        <div class="messages" *ngIf="selectedChatIndex !== null">
+            <div class="messages-header">
+                <!-- <span class="chat-name">{{ chats[selectedChatIndex].name }}</span> -->
+                <div class="messages-header-left">
+                    <div class="chat-image-wrapper">
+                      <img [src]="chats[selectedChatIndex].image" alt="Imagen de Usuario" class="chat-image">
+                    </div>
+                    <span class="chat-name">{{ chats[selectedChatIndex].name }}</span>
+                </div>
+
+                <div class="messages-header-right">
+                    <button class="icon-button"><img [src]="iconTelephone"></button>
+                    <button class="icon-button"><img [src]="iconCamera"></button>
+                    <button class="icon-button"><img [src]="iconInfo"></button>
+                </div>
+            </div>
+
+              <div class="chat-container">
+                <div class="messages-content">
+             
+              
+                  <!-- Mensaje enviado -->
+                  <div class="message-container sent">
+                    <div class="message-bubble">
+                      <p class="message-text">Buenos dias</p>
+                      <span class="message-time-right">12:48 PM</span>
+                    </div>
+                    <div class="message-avatar">
+                        <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                      </div>
+                  </div>
+
+                       <!-- Mensaje recibido -->
+                       <div class="message-container received">
+                        <div class="message-avatar">
+                          <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                        </div>
+                        <div class="message-bubble">
+                          <p class="message-text">Buenas, una consulta</p>
+                          <span class="message-time-left">12:48 PM</span>
+                        </div>
+                      </div>
+
+                      <div *ngFor="let message of messages">
+                        <!-- Mensaje enviado -->
+                        <div class="message-container sent" *ngIf="message.sender === 'user'; else receivedMessage">
+                          <div class="message-bubble">
+                            <p class="message-text">{{ message.text }}</p>
+                            <span class="message-time-right">{{ message.timestamp | date : "HH:mm a" }}</span>
+                          </div>
+                          <div class="message-avatar">
+                            <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                          </div>
+                        </div>
+                      
+                        <!-- Mensaje recibido -->
+                        <ng-template #receivedMessage>
+                          <div class="message-container received">
+                            <div class="message-avatar">
+                              <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                            </div>
+                            <div class="message-bubble">
+                              <p class="message-text">{{ message.text }}</p>
+                              <span class="message-time-left">{{ message.timestamp | date : "HH:mm a" }}</span>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                      <!-- <div
+                      *ngFor="let message of messages"
+                      [ngClass]="{
+                        'message-container received': message.sender === 'bot',
+                        'message-container sent': message.sender === 'user'
+                      }">
+                        <div *ngIf="message.sender ==='bot'" class="message-avatar">
+                          <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                        </div>
+                        <div *ngIf="message.type === 'text'" class="message-bubble">
+                          <p class="message-text">{{ message.text }}</p>
+                          <span [ngClass]="{
+                            'message-time-left': message.sender === 'bot',
+                            'message-time-right': message.sender === 'user'
+                          }">{{ message.timestamp | date : "HH:mm a" }}</span>
+
+                        </div>
+
+                        <div *ngIf="message.sender ==='user'" class="message-avatar">
+                          <img [src]="imgUser1" alt="Avatar de Usuario" class="avatar-image">
+                        </div>
+                    
+                    </div> -->
+                </div>
+              </div>
+              
+              <div class="message-input-container">
+                <!-- <input type="text" class="message-input" placeholder="Escribe un mensaje..."> -->
+                <textarea
+                #textarea
+                [(ngModel)]="newMessage"
+                type="text"
+                placeholder="Escribe tu mensaje..."
+                class="message-input"
+                rows="1"
+                (input)="autoResize()"
+              >
+              </textarea>
+                <div class="input-icons">
+                  <button (click)="sendTextMessage()" class="icon-button icon-send"><img [src]="iconSendMessage"></button>
+                  <!-- <button class="icon-button"><img [src]="iconAddFile"></button> -->
+                    <div class="image-send">
+                      <label for="file-input">
+                        <img [src]="iconAddFile"/>
+                      </label>
+                        <input id="file-input"
+                        #imageInput
+                        type="file"
+                        (change)="onFileSelected($event)"
+                        accept="image/*"
+                        hidden
+                      />
+                    </div>
+                
+                  <button class="icon-button"><img [src]="iconCheck"></button>
+                </div>
+              </div>
+        </div>
+    </div>
+
+</div>
+  

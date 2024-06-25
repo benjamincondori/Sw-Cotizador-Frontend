@@ -13,10 +13,6 @@ export class AdvisorService {
 
   constructor(private http:HttpClient) {}
 
-  create1(userData: {name: string, lastName: string, userName:string, email:string, password: string}){
-    return this.http.post(`${this.apiURL}/asesor/create`, userData);
-  }
-
   async getPasswordRandom(){
     let password = "Sw@";
     const quantityDigitsAdd = 4;
@@ -60,12 +56,26 @@ export class AdvisorService {
     ); 
    }
 
-   create(userData: {name: string, lastName: string, email:string, password: string}):Observable<{}>{
+   create(userData: {name: string, lastName: string, userName:string, email:string, password: string}):Observable<{}>{
     return this.http.post(`${this.apiURL}/asesor/create`, userData)
     .pipe(
       tap(()=>{
         this.tableAdvisors$.next();
       })
     );
+  }
+
+  getUsersChat() {
+    return this.http.get(`${this.apiURL}/full-chat/chat`)
+    .pipe(
+      tap(()=>{
+        this.tableAdvisors$.next();
+      })
+    );  
+  }
+
+  getClient(){
+    const email ="cliente1@gmail.com";
+    return this.http.get(`${this.apiURL}/asesor/get/${email}`);
   }
 }

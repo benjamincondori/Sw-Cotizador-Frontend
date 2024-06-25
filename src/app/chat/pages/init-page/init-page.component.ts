@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class InitPageComponent {
 
+  public modalOpen: boolean = false;
+
+  openSelectionAsesorModal() {
+    console.log('open modal');
+    this.modalOpen = true;
+    
+  }
+
+  closeSelectionAsesorModal() {
+    this.modalOpen = false;
+  }
+
 }

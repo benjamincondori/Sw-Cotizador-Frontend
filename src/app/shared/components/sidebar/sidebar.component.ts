@@ -4,7 +4,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserCurrent } from 'src/app/auth/interfaces/user.interface';
 import { Subscription } from 'rxjs';
 
-const PHOTO: string = './assets/avatars/user-profile-dark.png';
+//const PHOTO: string = './assets/avatars/user-profile-dark.png';
+const PHOTO: string = 'assets/avatars/user-profile-dark.png';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,7 @@ export class SidebarComponent {
   }
   
   get photo(): string {
-    return this.user?.profile.photo || PHOTO;
+    return PHOTO;
   }
   
   OnDestroy(): void {

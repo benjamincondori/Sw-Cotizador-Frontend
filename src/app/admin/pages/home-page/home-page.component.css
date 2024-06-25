@@ -209,7 +209,7 @@ td {
   align-items: center;
   justify-content: center;
   color: #343ec1;
-  font-weight: bold; /* Opcionalmente, también puedes usar 'bolder' */
+  font-weight: bold;
 }
 
 .pageNumber button.active {

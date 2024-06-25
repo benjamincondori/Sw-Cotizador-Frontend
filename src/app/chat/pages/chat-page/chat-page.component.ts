@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SidebarChatComponent } from '../../components/sidebar-chat/sidebar-chat.component';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -12,8 +14,12 @@ export class ChatPageComponent implements OnInit {
   chatId?: string | null;
   data: any;
   images!: string[];
+  asesor: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private chatService: ChatService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

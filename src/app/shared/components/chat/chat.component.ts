@@ -1,30 +1,99 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component,ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Subscription, timestamp } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { SidebarChatComponent } from 'src/app/chat/components/sidebar-chat/sidebar-chat.component';
+import { ChatService } from 'src/app/chat/services/chat.service';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
+
+
   @ViewChild('textarea') textareaRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('imageInput') imageInputRef!: ElementRef;
   @ViewChild('chatMessages', { static: true }) chatMessagesRef!: ElementRef;
 
+  dataSubscription?: Subscription;
+  
+  imgUser1: string = 'assets/avatars/300-1.jpg';
   messages: any[] = [];
   newMessage: string = '';
   selectedImage: File | null = null;
   initialHeightTextarea!: string;
   imageUrl: SafeUrl | null = null; 
+  asesor:any
+  img :string ="assets/images/img-user.png";
+  messageList: string[] = []
+  room: string ="chat1"
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private chatService: ChatService,
+    private socketService: SocketService,
+    private router: Router
+  ) {
+    this.socketService.onMessage((data: any) => {
+      console.log(data);
+
+      this.messages.push({
+        type: 'text',
+        text: data.message,
+        sender: 'bot',
+        timestamp: new Date()
+      })
+        // Agregar mensaje recibido al array de mensajes
+    });
+  }
   
-  constructor(private sanitizer: DomSanitizer) {}
-  
+  ngOnInit(): void {
+    this.dataSubscription = this.chatService.getData().subscribe(
+      (value) => {
+        if(value != null){
+          console.log('Valor recibido del BehaviorSubject:', value);
+          this.asesor = value; 
+          console.log('Datos específicos:', this.asesor);
+        }else{
+          console.log(' no hay value'); 
+        }
+      },
+      (error) => {
+        console.error('Error al obtener datos del BehaviorSubject:', error);
+      }
+    );
+
+      this.socketService.joinRoom(this.room);
+
+  //   this.socketService.getNewMessage().subscribe({
+  //     next: ( message:string) =>{
+  //       this.messageList.push(message);
+  //     }
+  //   })
+  }
+
   ngAfterViewInit() {
     this.initialHeightTextarea = this.textareaRef.nativeElement.style.height; // Guarda la altura inicial
   }
 
+  // sendMessage() {
+  //   this.socketService.sendMessage(this.newMessage);
+  //   this.newMessage = '';
+  // }
+
+  closeRoom(){
+    this.router.navigate(['/dashboard/chats']);
+    this.socketService.leaveRoom(this.room)
+    
+  }
   sendTextMessage(): void {
+    
     if (this.newMessage.trim() !== '') {
+      this.socketService.sendMessage(this.room,this.newMessage, this.asesor.name)  
       this.messages.push({
         type: 'text',
         text: this.newMessage,
